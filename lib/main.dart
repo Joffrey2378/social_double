@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:social_double/models/favorites_model.dart';
 import 'package:social_double/models/wall_model.dart';
 import 'package:social_double/pages/favorites_page.dart';
+import 'package:social_double/pages/registration/widget.dart';
 import 'package:social_double/pages/wall_page.dart';
 
 import 'common/theme.dart';
@@ -22,10 +23,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: appTheme,
-        initialRoute: '/',
+        initialRoute: '/registration',
         routes: {
           '/': (context) => WallPage(),
           '/favorites': (context) => FavoritesPage(),
+          '/registration': (context) => RegistrationWidget(),
         },
       ),
     );
