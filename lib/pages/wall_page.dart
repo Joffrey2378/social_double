@@ -13,7 +13,7 @@ class WallPage extends StatelessWidget {
           SliverToBoxAdapter(child: SizedBox(height: 12)),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-                    (context, index) => _MyListItem(index)),
+                (context, index) => _MyListItem(index)),
           ),
         ],
       ),
@@ -30,12 +30,12 @@ class _LikeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var favs = Provider.of<FavoritesModel>(context);
 
-    return FlatButton(
-      padding: EdgeInsets.all(0),
+    return IconButton(
       onPressed: favs.items.contains(item) ? null : () => favs.add(item),
       splashColor: Theme.of(context).primaryColor,
-      child: favs.items.contains(item)
-          ? Icon(Icons.favorite, semanticLabel: 'LIKED', color: Colors.red,)
+      icon: favs.items.contains(item)
+          ? Icon(Icons.favorite, semanticLabel: 'LIKED'
+          , color: Colors.red)
           : Icon(Icons.favorite_border, semanticLabel: 'LIKE'),
     );
   }
@@ -45,11 +45,14 @@ class _MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      title: Text('Wall', style: Theme.of(context).textTheme.display4),
+      title: Text('Wall', style: Theme.of(context).textTheme.display1),
       floating: true,
       actions: [
         IconButton(
-          icon: Icon(Icons.shopping_cart),
+          icon: Icon(
+            Icons.favorite,
+            color: Colors.red[900],
+          ),
           onPressed: () => Navigator.pushNamed(context, '/favorites'),
         ),
       ],
@@ -69,24 +72,25 @@ class _MyListItem extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme.title;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      child: Card(
         child: Column(
           children: <Widget>[
             Container(
               height: 150,
               color: post.color,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(post.author, style: textTheme),
-                  ),
-                  _LikeButton(item: post),
-                ],
-              ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(Icons.account_circle),
+                ),
+                Expanded(
+                  child: Text(post.author, style: textTheme),
+                ),
+                _LikeButton(item: post),
+              ],
             ),
           ],
         ),
