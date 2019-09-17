@@ -15,7 +15,7 @@ class FavoritesPage extends StatelessWidget {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(8.0),
                 child: _FavoritesList(),
               ),
             ),
@@ -37,42 +37,20 @@ class _FavoritesList extends StatelessWidget {
     return ListView.builder(
       itemCount: favs.items.length,
       itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.account_circle),
-        title: Text(
-          favs.items[index].author,
-          style: itemNameStyle,
+        contentPadding: EdgeInsets.all(0.0),
+        title: Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.account_circle),
+            ),
+            Text(
+              favs.items[index].author,
+              style: itemNameStyle,
+            ),
+          ],
         ),
       ),
     );
   }
 }
-
-//class _FavoritesTotal extends StatelessWidget {
-//  @override
-//  Widget build(BuildContext context) {
-//    var hugeStyle = Theme.of(context).textTheme.display4.copyWith(fontSize: 48);
-//
-//    return SizedBox(
-//      height: 200,
-//      child: Center(
-//        child: Row(
-//          mainAxisAlignment: MainAxisAlignment.center,
-//          children: [
-//            Consumer<FavoritesModel>(
-//                builder: (context, cart, child) =>
-//                    Text('\$${cart.totalPrice}', style: hugeStyle)),
-//            SizedBox(width: 24),
-//            FlatButton(
-//              onPressed: () {
-//                Scaffold.of(context).showSnackBar(
-//                    SnackBar(content: Text('Buying not supported yet.')));
-//              },
-//              color: Colors.white,
-//              child: Text('BUY'),
-//            ),
-//          ],
-//        ),
-//      ),
-//    );
-//  }
-//}
